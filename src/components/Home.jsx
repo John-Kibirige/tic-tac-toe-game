@@ -8,8 +8,16 @@ const Home = () => {
     setChoice(value);
   };
 
+  const playWithCPU = () => {
+    // update the play with state so as to play with computer
+  };
+
+  const playWithPlayer = () => {
+    // play with player
+  };
+
   return (
-    <div className='sm:w-1/3 mx-auto mt-8 px-6'>
+    <div className='sm:w-1/3 mx-auto mt-10 px-6'>
       <>
         <svg
           className='logo block mx-auto my-6'
@@ -103,10 +111,14 @@ const Home = () => {
       </div>
 
       <div className='opponents'>
-        <button className='with-cpu bg-yellow-500 block uppercase text-slate-800 tracking-wider font-medium py-3 w-full rounded-lg mt-8 shadow-3xl-o'>
+        <button
+          className='with-cpu bg-yellow-500 block uppercase text-slate-800 tracking-wider font-medium py-3 w-full rounded-lg mt-8 shadow-3xl-o'
+          onClick={playWithCPU}>
           new game (vs cpu)
         </button>
-        <button className='with-cpu bg-cyan-400 block uppercase text-slate-800 tracking-wider font-medium py-3 w-full rounded-lg mt-5  mb-5 shadow-3xl-c'>
+        <button
+          className='with-cpu bg-cyan-400 block uppercase text-slate-800 tracking-wider font-medium py-3 w-full rounded-lg mt-5  mb-5 shadow-3xl-c'
+          onClick={playWithPlayer}>
           new game (vs player)
         </button>
       </div>
