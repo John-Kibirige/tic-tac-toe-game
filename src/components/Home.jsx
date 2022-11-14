@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updatePlayerOne, updatePlayerTwo } from '../redux/cards';
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { players } = useSelector((state) => state.clickedCards);
+  
   const [choice, setChoice] = useState('o');
 
   const handleChange = (event) => {
@@ -8,12 +13,18 @@ const Home = () => {
     setChoice(value);
   };
 
+  useEffect(() => {
+    dispatch(updatePlayerOne(choice));
+  }, [choice]);
+
   const playWithCPU = () => {
-    // update the play with state so as to play with computer
+    const playerTwoChoice = choice === 'x' ? 'o' : 'x';
+    dispatch(updatePlayerTwo({ name: 'cpu', choice: playerTwoChoice }));
   };
 
   const playWithPlayer = () => {
-    // play with player
+    const playerTwoChoice = choice === 'x' ? 'o' : 'x';
+    dispatch(updatePlayerTwo({ name: 'Player 2', choice: playerTwoChoice }));
   };
 
   return (

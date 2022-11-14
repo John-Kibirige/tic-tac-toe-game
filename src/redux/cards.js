@@ -35,11 +35,13 @@ const cardSlice = createSlice({
     },
     updatePlayerTwo: (state, action) => {
       const st = state;
-      st.players[1].playerTwo.choice = action.payload;
+      st.players[1].playerTwo.name = action.payload.name;
+      st.players[1].playerTwo.choice = action.payload.choice;
     },
   },
 });
 
-export const { clickedCard } = cardSlice.actions;
+export const { clickedCard, updatePlayerOne, updatePlayerTwo } =
+  cardSlice.actions;
 
 export default cardSlice;
