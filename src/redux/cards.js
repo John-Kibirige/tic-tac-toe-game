@@ -16,6 +16,7 @@ const initialState = {
       },
     },
   ],
+  difficulty: '',
 };
 
 const cardSlice = createSlice({
@@ -38,10 +39,14 @@ const cardSlice = createSlice({
       st.players[1].playerTwo.name = action.payload.name;
       st.players[1].playerTwo.choice = action.payload.choice;
     },
+    setDifficulty: (state, action) => {
+      const st = state;
+      st.difficulty = action.payload;
+    },
   },
 });
 
-export const { clickedCard, updatePlayerOne, updatePlayerTwo } =
+export const { clickedCard, updatePlayerOne, updatePlayerTwo, setDifficulty } =
   cardSlice.actions;
 
 export default cardSlice;
