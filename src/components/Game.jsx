@@ -3,6 +3,7 @@ import Card from './Card';
 import { useSelector } from 'react-redux';
 import { nextPlayer } from '../scripts/nextPlay';
 import GameHeader from './GameHeader';
+import Bottom from './Bottom';
 
 const Game = () => {
   const { clickedCards } = useSelector((state) => state.clickedCards);
@@ -12,9 +13,10 @@ const Game = () => {
     <Card key={card} id={card} next={next} />
   ));
   return (
-    <div className='px-6 border border-green-400'>
+    <div className='px-6 mt-10 pb-6 '>
       <GameHeader next={next} />
       <div className='cards grid grid-cols-3 mt-5 gap-4 mb-5'>{cards}</div>
+      <Bottom />
     </div>
   );
 };

@@ -35,7 +35,7 @@ const GameHeader = (props) => {
         <div className='player'>
           {next === 'x' ? (
             <svg
-              className='py-1 w-4 fill-slate-100'
+              className='py-1 w-4 fill-slate-200'
               width='100%'
               height='100%'
               viewBox='0 0 64 64'
@@ -47,7 +47,7 @@ const GameHeader = (props) => {
             </svg>
           ) : (
             <svg
-              className='py-1 w-4 fill-slate-100'
+              className='py-1 w-4 fill-slate-200'
               width='100%'
               height='100%'
               viewBox='0 0 64 64'
