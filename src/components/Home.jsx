@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updatePlayerOne, updatePlayerTwo } from '../redux/cards';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { players } = useSelector((state) => state.clickedCards);
-  
+
   const [choice, setChoice] = useState('o');
 
   const handleChange = (event) => {
@@ -24,7 +23,7 @@ const Home = () => {
 
   const playWithPlayer = () => {
     const playerTwoChoice = choice === 'x' ? 'o' : 'x';
-    dispatch(updatePlayerTwo({ name: 'Player 2', choice: playerTwoChoice }));
+    dispatch(updatePlayerTwo({ name: 'player 2', choice: playerTwoChoice }));
   };
 
   return (
