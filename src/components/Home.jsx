@@ -112,12 +112,12 @@ const Home = () => {
 
       <div className='opponents'>
         <button
-          className='with-cpu bg-yellow-500 block uppercase text-slate-800 tracking-wider font-medium py-3 w-full rounded-lg mt-8 shadow-3xl-o'
+          className='with-cpu bg-zei-yel hover:bg-yellow-400 transition-all block uppercase text-slate-800 tracking-wider font-medium py-3 w-full rounded-lg mt-8 shadow-3xl-o active:scale-105'
           onClick={playWithCPU}>
           new game (vs cpu)
         </button>
         <button
-          className='with-cpu bg-cyan-400 block uppercase text-slate-800 tracking-wider font-medium py-3 w-full rounded-lg mt-5  mb-5 shadow-3xl-c'
+          className='with-cpu bg-zei-cyan hover:bg-cyan-400 block uppercase text-slate-800 tracking-wider font-medium py-3 w-full rounded-lg mt-5  mb-5 shadow-3xl-c transition-all active:scale-105'
           onClick={playWithPlayer}>
           new game (vs player)
         </button>

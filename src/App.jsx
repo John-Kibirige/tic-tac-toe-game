@@ -5,8 +5,8 @@ import Home from './components/Home';
 const App = () => {
   return (
     <div className='App'>
-      {/* <Home /> */}
-      <Game />
+      <Home />
+      {/* <Game /> */}
     </div>
   );
 };
