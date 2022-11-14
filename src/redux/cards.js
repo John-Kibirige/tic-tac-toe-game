@@ -18,4 +18,5 @@ const cardSlice = createSlice({
 });
 
 export const { clickedCard } = cardSlice.actions;
+
 export default cardSlice;

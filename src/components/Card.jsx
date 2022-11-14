@@ -5,32 +5,30 @@ import { clickedCard } from '../redux/cards';
 import Hover from './Hover';
 
 const Card = (prop) => {
-  const { id } = prop;
-
-  const dispatch = useDispatch();
+  const { id, next } = prop;
   const { clickedCards } = useSelector((state) => state.clickedCards);
+  const dispatch = useDispatch();
 
-  const [activePlayer, setActivePlayer] = useState('x');
-
-  //   maintain local state to help with effecting the hovering effect
   const [hoverSymbol, setHoverSymbol] = useState('');
-  const [isClicked, setIsClicked] = useState(false);
+  const [cardVal, setCardVal] = useState('');
 
   const handleOnCardClicked = () => {
     dispatch(clickedCard(id));
-    setIsClicked(true);
     setHoverSymbol('');
+    setCardVal(() => {
+      return next === 'o' ? 'o' : 'x';
+    });
   };
 
   const handleMouseOverEvent = () => {
     if (!clickedCards.includes(id)) {
-      setHoverSymbol(activePlayer);
+      setHoverSymbol(next);
     }
   };
 
   const handleMouseOutEvent = () => {
     setHoverSymbol('');
-  };  
+  };
 
   return (
     <div
@@ -38,7 +36,7 @@ const Card = (prop) => {
       onClick={handleOnCardClicked}
       onMouseOver={handleMouseOverEvent}
       onMouseOut={handleMouseOutEvent}>
-      {activePlayer === 'x' && isClicked && (
+      {cardVal === 'x' && (
         <svg
           className='py-1 w-11'
           width='100%'
@@ -52,7 +50,7 @@ const Card = (prop) => {
           />
         </svg>
       )}
-      {activePlayer === 'o' && isClicked && (
+      {cardVal === 'o' && (
         <svg
           className='py-1 w-11'
           width='100%'
