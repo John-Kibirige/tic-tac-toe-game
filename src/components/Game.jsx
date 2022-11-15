@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from './Card';
 import { useSelector } from 'react-redux';
 import { nextPlayer } from '../scripts/nextPlay';
 import GameHeader from './GameHeader';
 import Bottom from './Bottom';
+import { getWinner } from '../scripts/winner';
 
 const Game = () => {
   const { clickedCards, players } = useSelector((state) => state.clickedCards);
   const next = nextPlayer(clickedCards);
-  if(clickedCards.length === 9){
-    console.log(clickedCards);
+  const [winner, setWinner] = useState('');
+
+  useEffect(() => {
+    if (clickedCards.length >= 5) {
+      setWinner(() => {
+        console.log('the players played ', clickedCards);
+        return getWinner(clickedCards);
+      });
+    }
+  });
+
+  if (clickedCards.length > 5) {
+    console.log('the winner is ', winner);
   }
 
   const player1 = players[0].playerOne.name;

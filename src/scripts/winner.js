@@ -12,10 +12,17 @@ const getWinner = (arr) => {
   const xTrack = arr.filter((_, index) => (index + 1) % 2 === 1);
   const oTrack = arr.filter((_, index) => (index + 1) % 2 === 0);
 
+  let winner = 'no-winner';
+
   winningStates.forEach((element) => {
-    if (element.every((e) => xTrack.includes(e))) return 'x';
-    if (element.every((e) => oTrack.includes(e))) return 'o';
+    if (element.every((e) => xTrack.includes(e))) {
+      winner = 'x';
+    }
+    if (element.every((e) => oTrack.includes(e))) {
+      winner = 'o';
+    }
   });
-  return '';
+  return winner;
 };
-console.log(getWinner([]));
+
+export { getWinner };
