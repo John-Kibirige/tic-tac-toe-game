@@ -5,44 +5,42 @@ import { nextPlayer } from '../scripts/nextPlay';
 import GameHeader from './GameHeader';
 import Bottom from './Bottom';
 import { getWinner } from '../scripts/winner';
+import WinnerPopup from './WinnerPopup';
 
 const Game = () => {
-  const { clickedCards, players } = useSelector((state) => state.clickedCards);
+  const { clickedCards } = useSelector((state) => state.clickedCards);
   const next = nextPlayer(clickedCards);
   const [winner, setWinner] = useState('');
+
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     if (clickedCards.length >= 5) {
       setWinner(() => {
-        console.log('the players played ', clickedCards);
         return getWinner(clickedCards);
       });
+      if (clickedCards.length === 9 && winner === 'no-winner') {
+        setShowPopup(true);
+      }
+      if (winner === 'x' || winner === 'o') {
+        setShowPopup(true);
+      }
     }
-  });
-
-  if (clickedCards.length > 5) {
-    console.log('the winner is ', winner);
-  }
-
-  const player1 = players[0].playerOne.name;
-  const choice1 = players[0].playerOne.choice;
-  const player2 = players[1].playerTwo.name;
-  const choice2 = players[1].playerTwo.choice;
+  }, [clickedCards]);
 
   const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9].map((card) => (
     <Card key={card} id={card} next={next} />
   ));
 
   return (
-    <div className='px-6 mt-10 pb-6 '>
+    <div className='px-6 mt-10 pb-6 relative'>
       <GameHeader next={next} />
       <div className='cards grid grid-cols-3 mt-5 gap-4 mb-5'>{cards}</div>
-      <Bottom
-        playerOne={player1}
-        playerTwo={player2}
-        choice1={choice1}
-        choice2={choice2}
-      />
+      <Bottom />
+      {showPopup && <WinnerPopup winner={winner} />}
+      {showPopup && (
+        <div className='overlay absolute left-0 right-0 top-0 bottom-0  bg-gray-900 opacity-60 -mt-40 -mb-40'></div>
+      )}
     </div>
   );
 };

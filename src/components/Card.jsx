@@ -32,7 +32,7 @@ const Card = (prop) => {
 
   return (
     <div
-      className='bg-zei-light flex justify-center items-center h-[96.2167px] rounded-lg shadow-3xl transition-all'
+      className='bg-zei-light flex justify-center items-center h-[96.2167px] rounded-lg shadow-3xl transition-all cursor-pointer'
       onClick={handleOnCardClicked}
       onMouseOver={handleMouseOverEvent}
       onMouseOut={handleMouseOutEvent}>
