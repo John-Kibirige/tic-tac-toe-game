@@ -65,8 +65,10 @@ const Home = () => {
             />
             <label
               htmlFor='c-x'
-              className={`x-svg w-full flex justify-center py-2 rounded-lg transition-all ${
-                choice === 'x' ? 'bg-slate-300' : ''
+              className={`x-svg w-full flex justify-center py-2 rounded-lg transition-all  ${
+                choice === 'x'
+                  ? 'bg-slate-300'
+                  : 'hover:bg-gray-700 cursor-pointer'
               }`}>
               <div>
                 <svg
@@ -97,8 +99,10 @@ const Home = () => {
             />
             <label
               htmlFor='c-o'
-              className={`o-svg w-full flex justify-center py-2 rounded-lg transition-all ${
-                choice === 'o' ? 'bg-slate-300' : ''
+              className={`o-svg w-full flex justify-center py-2 rounded-lg transition-all  ${
+                choice === 'o'
+                  ? 'bg-slate-300'
+                  : 'hover:bg-gray-700 cursor-pointer'
               } `}>
               <div>
                 <svg

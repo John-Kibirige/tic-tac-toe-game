@@ -8,6 +8,9 @@ import Bottom from './Bottom';
 const Game = () => {
   const { clickedCards, players } = useSelector((state) => state.clickedCards);
   const next = nextPlayer(clickedCards);
+  if(clickedCards.length === 9){
+    console.log(clickedCards);
+  }
 
   const player1 = players[0].playerOne.name;
   const choice1 = players[0].playerOne.choice;
