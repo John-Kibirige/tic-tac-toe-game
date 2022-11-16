@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetClickedCards } from '../redux/cards';
 
 const WinnerPopup = (props) => {
   const { winner } = props;
+  const dispatch = useDispatch();
   const [winningPlayer, setWinningPlayer] = useState('');
   const { players, clickedCards } = useSelector((state) => state.clickedCards);
 
+  // get name of player who won
   useEffect(() => {
     let player = 'tie';
     if (players[0].playerOne.choice === winner) {
@@ -16,6 +19,11 @@ const WinnerPopup = (props) => {
     }
     setWinningPlayer(player);
   }, [winner]);
+
+  // handle next round
+  const handleNextRound = () => {
+    dispatch(resetClickedCards());
+  };
 
   return (
     <section className='popup absolute top-0 bottom-0 right-0 left-0 flex flex-col z-50'>
@@ -73,11 +81,13 @@ const WinnerPopup = (props) => {
             </div>
           )}
         </div>
-        <div className='btns flex gap-4 justify-center'>
-          <button className='uppercase bg-slate-400 text-slate-800 px-2 pt-2 pb-1 rounded-lg font-medium tracking-wider cursor-pointer shadow-3xl-hw text-sm active:scale-105  hover:bg-slate-300'>
+        <div className='flex gap-4 justify-center'>
+          <button className='uppercase bg-slate-400 text-slate-800 px-3 pt-2 pb-1 rounded-lg font-medium tracking-wider cursor-pointer shadow-3xl-hw text-sm active:scale-105  hover:bg-slate-300'>
             quit
           </button>
-          <button className='uppercase bg-zei-yel text-slate-800 px-2 pt-3 pb-2  rounded-lg font-medium  tracking-wider cursor-pointer shadow-3xl-o2  text-sm active:scale-105 hover:bg-yellow-400'>
+          <button
+            className='uppercase bg-zei-yel text-slate-800 px-3 pt-3 pb-2  rounded-lg font-medium  tracking-wider cursor-pointer shadow-3xl-o2  text-sm active:scale-105 hover:bg-yellow-400'
+            onClick={handleNextRound}>
             next round
           </button>
         </div>

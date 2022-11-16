@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clickedCard } from '../redux/cards';
 
@@ -15,9 +15,7 @@ const Card = (prop) => {
   const handleOnCardClicked = () => {
     dispatch(clickedCard(id));
     setHoverSymbol('');
-    setCardVal(() => {
-      return next === 'o' ? 'o' : 'x';
-    });
+    setCardVal(next);
   };
 
   const handleMouseOverEvent = () => {
@@ -30,13 +28,19 @@ const Card = (prop) => {
     setHoverSymbol('');
   };
 
+  useEffect(() => {
+    if (clickedCards.length === 0) {
+      setCardVal('');
+    }
+  }, [clickedCards]);
+
   return (
     <div
       className='bg-zei-light flex justify-center items-center h-[96.2167px] rounded-lg shadow-3xl transition-all cursor-pointer'
       onClick={handleOnCardClicked}
       onMouseOver={handleMouseOverEvent}
       onMouseOut={handleMouseOutEvent}>
-      {cardVal === 'x' && (
+      {cardVal === 'x' && clickedCards.includes(id) && (
         <svg
           className='py-1 w-11'
           width='100%'
@@ -50,7 +54,7 @@ const Card = (prop) => {
           />
         </svg>
       )}
-      {cardVal === 'o' && (
+      {cardVal === 'o' && clickedCards.includes(id) && (
         <svg
           className='py-1 w-11'
           width='100%'

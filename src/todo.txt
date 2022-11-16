@@ -1,2 +1,3 @@
-remove this one's turn when the game is complete and when we get a winner 
-popup should display when their is a winner or when the length of the array is 9
+1 remove this one's turn when the game is complete and when we get a winner 
+2 popup should display when their is a winner or when the length of the array is 9
+3 the button should be clicked on once until when the clickedCards variable has nothing it is storing

@@ -19,14 +19,21 @@ const Game = () => {
       setWinner(() => {
         return getWinner(clickedCards);
       });
-      if (clickedCards.length === 9 && winner === 'no-winner') {
-        setShowPopup(true);
-      }
-      if (winner === 'x' || winner === 'o') {
-        setShowPopup(true);
-      }
+      setTimeout(() => {
+        if (winner === 'x' || winner === 'o') {
+          setShowPopup(true);
+          return;
+        }
+        if (clickedCards.length === 9 && winner === 'no-winner') {
+          setShowPopup(true);
+        }
+      }, 500);
     }
-  }, [clickedCards]);
+    if (clickedCards.length === 0) {
+      setShowPopup(false);
+      setWinner('');
+    }
+  }, [clickedCards, winner]);
 
   const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9].map((card) => (
     <Card key={card} id={card} next={next} />
@@ -39,7 +46,7 @@ const Game = () => {
       <Bottom />
       {showPopup && <WinnerPopup winner={winner} />}
       {showPopup && (
-        <div className='overlay absolute left-0 right-0 top-0 bottom-0  bg-gray-900 opacity-60 -mt-40 -mb-40'></div>
+        <div className='overlay absolute left-0 right-0 top-0 bottom-0 bg-gray-900 opacity-60 -mt-40 -mb-40'></div>
       )}
     </div>
   );
