@@ -11,14 +11,18 @@ const Game = () => {
   const { clickedCards } = useSelector((state) => state.clickedCards);
   const next = nextPlayer(clickedCards);
   const [winner, setWinner] = useState('');
+  const [winningPattern, setPattern] = useState([]);
 
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     if (clickedCards.length >= 5) {
       setWinner(() => {
-        return getWinner(clickedCards);
+        const { winner, pattern } = getWinner(clickedCards);
+        setPattern(pattern);
+        return winner;
       });
+
       setTimeout(() => {
         if (winner === 'x' || winner === 'o') {
           setShowPopup(true);
@@ -27,7 +31,7 @@ const Game = () => {
         if (clickedCards.length === 9 && winner === 'no-winner') {
           setShowPopup(true);
         }
-      }, 500);
+      }, 700);
     }
     if (clickedCards.length === 0) {
       setShowPopup(false);
@@ -36,11 +40,17 @@ const Game = () => {
   }, [clickedCards, winner]);
 
   const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9].map((card) => (
-    <Card key={card} id={card} next={next} />
+    <Card
+      key={card}
+      id={card}
+      next={next}
+      winner={winner}
+      pattern={winningPattern}
+    />
   ));
 
   return (
-    <div className='px-6 mt-10 pb-6 relative'>
+    <div className='px-6 mt-10 pb-6 relative transition-all'>
       <GameHeader next={next} />
       <div className='cards grid grid-cols-3 mt-5 gap-4 mb-5'>{cards}</div>
       <Bottom />

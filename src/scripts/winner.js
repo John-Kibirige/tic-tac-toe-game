@@ -13,16 +13,19 @@ const getWinner = (arr) => {
   const oTrack = arr.filter((_, index) => (index + 1) % 2 === 0);
 
   let winner = 'no-winner';
+  let winningPattern = [];
 
   winningStates.forEach((element) => {
     if (element.every((e) => xTrack.includes(e))) {
       winner = 'x';
+      winningPattern = element;
     }
     if (element.every((e) => oTrack.includes(e))) {
       winner = 'o';
+      winningPattern = element;
     }
   });
-  return winner;
+  return { winner, pattern: winningPattern };
 };
 
 export { getWinner };
