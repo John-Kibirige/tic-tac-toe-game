@@ -10,51 +10,55 @@ import WinnerPopup from './WinnerPopup';
 const Game = () => {
   const { clickedCards } = useSelector((state) => state.clickedCards);
   const next = nextPlayer(clickedCards);
-  const [winner, setWinner] = useState('');
-  const [winningPattern, setPattern] = useState([]);
+  const [winnerDetails, setWinnerDetails] = useState({
+    winner: '',
+    winningPattern: [],
+  });
 
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     if (clickedCards.length >= 5) {
-      setWinner(() => {
+      setWinnerDetails(() => {
         const { winner, pattern } = getWinner(clickedCards);
-        setPattern(pattern);
-        return winner;
+        return {
+          winner,
+          winningPattern: pattern,
+        };
       });
 
       setTimeout(() => {
-        if (winner === 'x' || winner === 'o') {
+        if (winnerDetails.winner === 'x' || winnerDetails.winner === 'o') {
           setShowPopup(true);
           return;
         }
-        if (clickedCards.length === 9 && winner === 'no-winner') {
+        if (clickedCards.length === 9 && winnerDetails.winner === 'no-winner') {
           setShowPopup(true);
         }
       }, 700);
     }
     if (clickedCards.length === 0) {
       setShowPopup(false);
-      setWinner('');
+      setWinnerDetails({ winner: '', winningPattern: [] });
     }
-  }, [clickedCards, winner]);
+  }, [clickedCards, winnerDetails.winner]);
 
   const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9].map((card) => (
     <Card
       key={card}
       id={card}
       next={next}
-      winner={winner}
-      pattern={winningPattern}
+      winner={winnerDetails.winner}
+      pattern={winnerDetails.winningPattern}
     />
   ));
 
   return (
     <div className='px-6 mt-10 pb-6 relative transition-all'>
-      <GameHeader next={next} />
+      <GameHeader next={next} winner={winnerDetails.winner } />
       <div className='cards grid grid-cols-3 mt-5 gap-4 mb-5'>{cards}</div>
       <Bottom />
-      {showPopup && <WinnerPopup winner={winner} />}
+      {showPopup && <WinnerPopup winner={winnerDetails.winner} />}
       {showPopup && (
         <div className='overlay absolute left-0 right-0 top-0 bottom-0 bg-gray-900 opacity-60 -mt-40 -mb-40'></div>
       )}

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const GameHeader = (props) => {
-  const { next } = props;
+  const { next, winner, numberOfActiveCards } = props;
+  const [isTurn, setIsTurn] = useState(false);
   return (
     <div className='header grid grid-cols-3 gap-4 mt-5 mb-3'>
       <div className='logo'>

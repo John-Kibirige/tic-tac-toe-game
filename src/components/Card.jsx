@@ -13,9 +13,11 @@ const Card = (prop) => {
   const [cardVal, setCardVal] = useState('');
 
   const handleOnCardClicked = () => {
-    dispatch(clickedCard(id));
-    setHoverSymbol('');
-    setCardVal(next);
+    if (!clickedCards.includes(id)) {
+      dispatch(clickedCard(id));
+      setHoverSymbol('');
+      setCardVal(next);
+    }
   };
 
   const handleMouseOverEvent = () => {
