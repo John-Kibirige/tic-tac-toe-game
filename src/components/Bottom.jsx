@@ -1,14 +1,29 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateWinnerCount } from '../redux/cards';
 
 const Bottom = (props) => {
-  const { xCount = 0, draws = 0, oCount = 0 } = props;
+  const { winner, xCount = 0, oCount = 0, draws = 0 } = props;
 
-  const { players } = useSelector((state) => state.clickedCards);
+  const dispatch = useDispatch();
+  const { players, clickedCards, winnerCount } = useSelector(
+    (state) => state.clickedCards
+  );
+
   const player1 = players[0].playerOne.name;
   const choice1 = players[0].playerOne.choice;
   const player2 = players[1].playerTwo.name;
   const choice2 = players[1].playerTwo.choice;
+
+  useEffect(() => {
+    if (winner === choice1) {
+      dispatch(updateWinnerCount(player1));
+    } else if (winner === choice2) {
+      dispatch(updateWinnerCount(player2));
+    } else if (winner === 'no-winner' && clickedCards.length === 9) {
+      dispatch(updateWinnerCount('tie'));
+    }
+  }, [clickedCards]);
 
   return (
     <div className='grid grid-cols-3 gap-4 text-center uppercase text-sm font-bold mt-5'>

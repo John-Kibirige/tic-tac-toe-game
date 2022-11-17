@@ -55,9 +55,9 @@ const Game = () => {
 
   return (
     <div className='px-6 mt-10 pb-6 relative transition-all'>
-      <GameHeader next={next} winner={winnerDetails.winner } />
+      <GameHeader next={next} winner={winnerDetails.winner} />
       <div className='cards grid grid-cols-3 mt-5 gap-4 mb-5'>{cards}</div>
-      <Bottom />
+      <Bottom winner={winnerDetails.winner} />
       {showPopup && <WinnerPopup winner={winnerDetails.winner} />}
       {showPopup && (
         <div className='overlay absolute left-0 right-0 top-0 bottom-0 bg-gray-900 opacity-60 -mt-40 -mb-40'></div>
