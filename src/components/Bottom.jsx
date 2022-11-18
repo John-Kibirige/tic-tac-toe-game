@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateWinnerCount } from '../redux/cards';
 
 const Bottom = (props) => {
-  const { winner, xCount = 0, oCount = 0, draws = 0 } = props;
+  const { winner } = props;
 
   const dispatch = useDispatch();
   const { players, clickedCards, winnerCount } = useSelector(
@@ -27,19 +27,25 @@ const Bottom = (props) => {
 
   return (
     <div className='grid grid-cols-3 gap-4 text-center uppercase text-sm font-bold mt-5'>
-      <div className='x-count rounded-lg pt-1 bg-zei-cyan text-slate-800 '>
+      <div
+        className={`x-count rounded-lg pt-1 text-slate-800 ${
+          choice1 === 'x' ? 'bg-zei-cyan' : 'bg-zei-yel'
+        } `}>
         <p className='tracking-wider'>{`${choice1} (${player1})`}</p>
-        <p className='text-lg '>{xCount}</p>
+        <p className='text-lg '>{winnerCount[`${player1}`]}</p>
       </div>
 
       <div className='draws rounded-lg pt-1 pb-0 bg-slate-400 text-slate-800 '>
         <p className='tracking-wider'>ties</p>
-        <p className='text-lg '>{draws}</p>
+        <p className='text-lg '>{winnerCount.tie}</p>
       </div>
 
-      <div className='o-count rounded-lg pt-1 bg-zei-yel text-slate-800  pb-0'>
+      <div
+        className={`o-count rounded-lg pt-1  text-slate-800  pb-0 ${
+          choice2 === 'o' ? 'bg-zei-yel' : 'bg-zei-cyan'
+        }`}>
         <p className='tracking-wider'>{`${choice2} (${player2})`}</p>
-        <p className='text-lg '>{oCount}</p>
+        <p className='text-lg '>{winnerCount[`${player2}`]}</p>
       </div>
     </div>
   );
