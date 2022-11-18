@@ -23,6 +23,7 @@ const initialState = {
     cpu: 0,
     'player 2': 0,
   },
+  quit: false,
 };
 
 const cardSlice = createSlice({
@@ -61,6 +62,19 @@ const cardSlice = createSlice({
         [payload]: st.winnerCount[`${payload}`] + 1,
       };
     },
+    resetWinnerCount: (state) => {
+      const st = state;
+      st.winnerCount = {
+        tie: 0,
+        you: 0,
+        cpu: 0,
+        'player 2': 0,
+      };
+    },
+    updateQuit: (state, { payload }) => {
+      const st = state;
+      st.quit = payload;
+    },
   },
 });
 
@@ -71,6 +85,8 @@ export const {
   setDifficulty,
   resetClickedCards,
   updateWinnerCount,
+  updateQuit,
+  resetWinnerCount,
 } = cardSlice.actions;
 
 export default cardSlice;

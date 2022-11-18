@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updatePlayerOne, updatePlayerTwo } from '../redux/cards';
+import { updateQuit } from '../redux/cards';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,11 +20,13 @@ const Home = () => {
   const playWithCPU = () => {
     const playerTwoChoice = choice === 'x' ? 'o' : 'x';
     dispatch(updatePlayerTwo({ name: 'cpu', choice: playerTwoChoice }));
+    dispatch(updateQuit(false));
   };
 
   const playWithPlayer = () => {
     const playerTwoChoice = choice === 'x' ? 'o' : 'x';
     dispatch(updatePlayerTwo({ name: 'player 2', choice: playerTwoChoice }));
+    dispatch(updateQuit(false));
   };
 
   return (

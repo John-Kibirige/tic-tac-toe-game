@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Game from './components/Game';
 import Home from './components/Home';
 import Difficulty from './components/Difficulty';
 
 const App = () => {
-  const { players, difficulty } = useSelector((state) => state.clickedCards);
+  const { players, difficulty, clickedCards, quit } = useSelector(
+    (state) => state.clickedCards
+  );
 
   const [showGame, setShowGame] = useState(false);
   const [showDifficulty, setShowDifficulty] = useState(false);
@@ -25,6 +27,16 @@ const App = () => {
       } else {
         setShowDifficulty(false);
       }
+    }
+  });
+
+  console.log('the state of quit is ', quit);
+
+  // user clicks quit
+  useEffect(() => {
+    if (quit === true) {
+      setShowGame(false);
+      setShowDifficulty(false);
     }
   });
 

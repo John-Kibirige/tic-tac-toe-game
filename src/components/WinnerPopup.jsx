@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetClickedCards } from '../redux/cards';
+import {
+  resetClickedCards,
+  updateQuit,
+  resetWinnerCount,
+} from '../redux/cards';
 
 const WinnerPopup = (props) => {
   const { winner } = props;
@@ -23,6 +27,12 @@ const WinnerPopup = (props) => {
   // handle next round
   const handleNextRound = () => {
     dispatch(resetClickedCards());
+  };
+
+  const handleQuit = () => {
+    dispatch(updateQuit(true));
+    dispatch(resetClickedCards());
+    dispatch(resetWinnerCount());
   };
 
   return (
@@ -82,7 +92,9 @@ const WinnerPopup = (props) => {
           )}
         </div>
         <div className='flex gap-4 justify-center'>
-          <button className='uppercase bg-slate-400 text-slate-800 px-3 pt-2 pb-1 rounded-lg font-medium tracking-wider cursor-pointer shadow-3xl-hw text-sm active:scale-105  hover:bg-slate-300'>
+          <button
+            className='uppercase bg-slate-400 text-slate-800 px-3 pt-2 pb-1 rounded-lg font-medium tracking-wider cursor-pointer shadow-3xl-hw text-sm active:scale-105  hover:bg-slate-300'
+            onClick={handleQuit}>
             quit
           </button>
           <button
