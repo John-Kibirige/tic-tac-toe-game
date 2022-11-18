@@ -30,8 +30,6 @@ const App = () => {
     }
   });
 
-  console.log('the state of quit is ', quit);
-
   // user clicks quit
   useEffect(() => {
     if (quit === true) {

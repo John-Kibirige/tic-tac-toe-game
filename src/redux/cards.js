@@ -24,6 +24,7 @@ const initialState = {
     'player 2': 0,
   },
   quit: false,
+  restart: false,
 };
 
 const cardSlice = createSlice({
@@ -75,6 +76,10 @@ const cardSlice = createSlice({
       const st = state;
       st.quit = payload;
     },
+    updateRestart: (state, { payload }) => {
+      const st = state;
+      st.restart = payload;
+    },
   },
 });
 
@@ -87,6 +92,7 @@ export const {
   updateWinnerCount,
   updateQuit,
   resetWinnerCount,
+  updateRestart,
 } = cardSlice.actions;
 
 export default cardSlice;

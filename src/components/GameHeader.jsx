@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { updateRestart } from '../redux/cards';
 
 const GameHeader = (props) => {
-  const { next, winner, numberOfActiveCards } = props;
-  const [isTurn, setIsTurn] = useState(false);
+  const { next } = props;
+
+  const dispatch = useDispatch();
+
+  const handleRefresh = () => {
+    dispatch(updateRestart(true));
+  };
+
   return (
     <div className='header grid grid-cols-3 gap-4 mt-5 mb-3'>
       <div className='logo'>
@@ -59,7 +67,9 @@ const GameHeader = (props) => {
         </div>
         <p className='py-1 uppercase'>turn</p>
       </div>
-      <div className='refresh-btn bg-slate-400 flex justify-center align-middle rounded-lg cursor-pointer hover:bg-slate-200 transition-all ml-16 shadow-3xl-hw'>
+      <div
+        className='refresh-btn bg-slate-400 flex justify-center align-middle rounded-lg cursor-pointer hover:bg-slate-200 transition-all ml-16 shadow-3xl-hw active:scale-105'
+        onClick={handleRefresh}>
         <svg
           className='block my-auto'
           width='20'

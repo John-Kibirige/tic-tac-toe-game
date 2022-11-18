@@ -9,7 +9,7 @@ import WinnerPopup from './WinnerPopup';
 import RestartPopup from './RestartPopup';
 
 const Game = () => {
-  const { clickedCards } = useSelector((state) => state.clickedCards);
+  const { clickedCards, restart } = useSelector((state) => state.clickedCards);
   const next = nextPlayer(clickedCards);
   const [winnerDetails, setWinnerDetails] = useState({
     winner: '',
@@ -63,7 +63,7 @@ const Game = () => {
       {showPopup && (
         <div className='overlay absolute left-0 right-0 top-0 bottom-0 bg-gray-900 opacity-60 -mt-40 -mb-40'></div>
       )}
-      <RestartPopup />
+      {restart && <RestartPopup />}
     </div>
   );
 };
