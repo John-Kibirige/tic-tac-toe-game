@@ -96,3 +96,5 @@ export const {
 } = cardSlice.actions;
 
 export default cardSlice;
+
+console.log('the initials state of things ', initialState);

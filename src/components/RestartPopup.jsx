@@ -1,6 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { updateRestart, resetClickedCards } from '../redux/cards';
+import {
+  updateRestart,
+  resetClickedCards,
+  resetWinnerCount,
+} from '../redux/cards';
 
 const RestartPopup = () => {
   const dispatch = useDispatch();
@@ -11,6 +15,7 @@ const RestartPopup = () => {
   const handleRestart = () => {
     dispatch(updateRestart(false));
     dispatch(resetClickedCards());
+    dispatch(resetWinnerCount());
   };
 
   return (
