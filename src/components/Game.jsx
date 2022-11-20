@@ -21,7 +21,9 @@ const Game = () => {
   useEffect(() => {
     if (clickedCards.length >= 5) {
       setWinnerDetails(() => {
-        const { winner, pattern } = getWinner(clickedCards);
+        const { winner, pattern } = getWinner(
+          clickedCards.map((obj) => obj.id)
+        );
         return {
           winner,
           winningPattern: pattern,

@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clickedCard } from '../redux/cards';
+import { saveState } from '../scripts/storage';
 
 import Hover from './Hover';
 
 const Card = (prop) => {
   const { id, next, winner, pattern } = prop;
-  const { clickedCards } = useSelector((state) => state.clickedCards);
+  const pureState = useSelector((state) => state.clickedCards);
+  const { clickedCards } = pureState;
   const dispatch = useDispatch();
 
   const [hoverSymbol, setHoverSymbol] = useState('');
   const [cardVal, setCardVal] = useState('');
 
   const handleOnCardClicked = () => {
-    if (!clickedCards.includes(id)) {
-      dispatch(clickedCard(id));
+    if (!clickedCards.some((obj) => obj.id === id)) {
+      dispatch(clickedCard({ id, value: next }));
       setHoverSymbol('');
       setCardVal(next);
     }
   };
 
+  // suppose we just re rendered we want to set the card value to what is stored on the local storage
+  useEffect(() => {
+    const filtered = clickedCards.filter((obj) => obj.id === id);
+    if (filtered.length) {
+      setCardVal(filtered[0].value);
+    }
+  }, []);
+
   const handleMouseOverEvent = () => {
-    if (!clickedCards.includes(id)) {
+    if (!clickedCards.some((obj) => obj.id === id)) {
       setHoverSymbol(next);
     }
   };
@@ -30,10 +40,9 @@ const Card = (prop) => {
     setHoverSymbol('');
   };
 
+  // save state to local storage
   useEffect(() => {
-    if (clickedCards.length === 0) {
-      setCardVal('');
-    }
+    saveState(pureState);
   }, [clickedCards]);
 
   return (
@@ -48,7 +57,7 @@ const Card = (prop) => {
       onClick={handleOnCardClicked}
       onMouseOver={handleMouseOverEvent}
       onMouseOut={handleMouseOutEvent}>
-      {cardVal === 'x' && clickedCards.includes(id) && (
+      {cardVal === 'x' && clickedCards.some((obj) => obj.id === id) && (
         <svg
           className={`py-1 w-11 ${
             winner === 'x' && pattern.includes(id)
@@ -65,7 +74,7 @@ const Card = (prop) => {
           />
         </svg>
       )}
-      {cardVal === 'o' && clickedCards.includes(id) && (
+      {cardVal === 'o' && clickedCards.some((obj) => obj.id === id) && (
         <svg
           className={`py-1 w-11 ${
             winner === 'o' && pattern.includes(id)

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { loadState } from '../scripts/storage';
 
-const initialState = {
+const initialState = loadState() || {
   clickedCards: [],
   players: [
     {
@@ -31,10 +32,11 @@ const cardSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    clickedCard: (state, action) => {
+    clickedCard: (state, { payload }) => {
       const st = state;
-      if (!st.clickedCards.includes(action.payload)) {
-        st.clickedCards.push(action.payload);
+      const condition = st.clickedCards.some((obj) => obj.id === payload.id);
+      if (condition === false) {
+        st.clickedCards.push(payload);
       }
     },
 
@@ -97,4 +99,3 @@ export const {
 
 export default cardSlice;
 
-console.log('the initials state of things ', initialState);

@@ -16,3 +16,5 @@ const saveState = async (state) => {
     localStorage.setItem(KEY, serializedState);
   } catch {}
 };
+
+export { loadState, saveState };
