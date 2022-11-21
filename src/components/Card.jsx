@@ -43,7 +43,7 @@ const Card = (prop) => {
   // save state to local storage
   useEffect(() => {
     saveState(pureState);
-  }, [clickedCards]);
+  }, [clickedCards, winner]);
 
   return (
     <div

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loadState } from '../scripts/storage';
+import { loadState, saveState } from '../scripts/storage';
 
 const initialState = loadState() || {
   clickedCards: [],
@@ -98,4 +98,3 @@ export const {
 } = cardSlice.actions;
 
 export default cardSlice;
-
