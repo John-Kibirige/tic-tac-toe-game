@@ -4,3 +4,6 @@
 4 when we get a winner no other card should be clickable although this is catered for during the popup thing
 5 Detect if user has closed ALL windows for a website? using this website https://stackoverflow.com/questions/24865561/detect-if-user-has-closed-all-windows-for-a-website 
 6 remember choice should match color
+
+bug 
+when the size is 9, and its player x winning - this bug was well fixed

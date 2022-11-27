@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateWinnerCount } from '../redux/cards';
 
@@ -20,10 +20,10 @@ const Bottom = (props) => {
       dispatch(updateWinnerCount(player1));
     } else if (winner === choice2) {
       dispatch(updateWinnerCount(player2));
-    } else if (winner === 'no-winner' && clickedCards.length === 9) {
+    } else if (clickedCards.length === 9 && winner === '') {
       dispatch(updateWinnerCount('tie'));
     }
-  }, [clickedCards]);
+  }, [winner, clickedCards]);
 
   return (
     <div className='grid grid-cols-3 gap-4 text-center uppercase text-sm font-bold mt-5'>

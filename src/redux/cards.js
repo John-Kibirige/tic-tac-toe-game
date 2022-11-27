@@ -1,32 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadState, saveState } from '../scripts/storage';
+import { originalState } from '../scripts/originalState';
 
-const initialState = loadState() || {
-  clickedCards: [],
-  players: [
-    {
-      playerOne: {
-        name: 'you',
-        choice: '',
-      },
-    },
-    {
-      playerTwo: {
-        name: '',
-        choice: '',
-      },
-    },
-  ],
-  difficulty: '',
-  winnerCount: {
-    tie: 0,
-    you: 0,
-    cpu: 0,
-    'player 2': 0,
-  },
-  quit: false,
-  restart: false,
-};
+const initialState = loadState() || originalState;
 
 const cardSlice = createSlice({
   name: 'cards',

@@ -12,7 +12,7 @@ const getWinner = (arr) => {
   const xTrack = arr.filter((_, index) => (index + 1) % 2 === 1);
   const oTrack = arr.filter((_, index) => (index + 1) % 2 === 0);
 
-  let winner = 'no-winner';
+  let winner = '';
   let winningPattern = [];
 
   winningStates.forEach((element) => {
