@@ -5,7 +5,7 @@ import Home from './components/Home';
 import Difficulty from './components/Difficulty';
 
 const App = () => {
-  const { players, difficulty, clickedCards, quit } = useSelector(
+  const { players, difficulty, quit } = useSelector(
     (state) => state.clickedCards
   );
 
@@ -17,21 +17,16 @@ const App = () => {
     if (playerTwo.name === 'player 2' || difficulty !== '') {
       setShowGame(true);
     }
-  });
 
-  useEffect(() => {
-    const { playerTwo } = players[1];
     if (playerTwo.name === 'cpu') {
-      if (difficulty === '') {
-        setShowDifficulty(true);
-      } else {
-        setShowDifficulty(false);
-      }
+      setShowDifficulty(true);
     }
-  });
 
-  // user clicks quit
-  useEffect(() => {
+    if (difficulty) {
+      setShowDifficulty(false);
+      setShowGame(true);
+    }
+
     if (quit === true) {
       setShowGame(false);
       setShowDifficulty(false);

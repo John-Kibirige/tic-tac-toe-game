@@ -7,3 +7,5 @@
 
 bug 
 when the size is 9, and its player x winning - this bug was well fixed
+
+people finding out that i cannot do what i say i can do 

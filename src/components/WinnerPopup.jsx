@@ -4,6 +4,7 @@ import {
   resetClickedCards,
   updateQuit,
   resetWinnerCount,
+  resetDifficulty,
 } from '../redux/cards';
 
 const WinnerPopup = (props) => {
@@ -33,6 +34,7 @@ const WinnerPopup = (props) => {
     dispatch(updateQuit(true));
     dispatch(resetClickedCards());
     dispatch(resetWinnerCount());
+    dispatch(resetDifficulty());
   };
 
   return (

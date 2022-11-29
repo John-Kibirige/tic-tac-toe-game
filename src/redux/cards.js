@@ -29,6 +29,10 @@ const cardSlice = createSlice({
       const st = state;
       st.difficulty = action.payload;
     },
+    resetDifficulty: (state) => {
+      const st = state;
+      st.difficulty = '';
+    },
     resetClickedCards: (state) => {
       const st = state;
       st.clickedCards = [];
@@ -66,6 +70,7 @@ export const {
   updatePlayerOne,
   updatePlayerTwo,
   setDifficulty,
+  resetDifficulty,
   resetClickedCards,
   updateWinnerCount,
   updateQuit,
