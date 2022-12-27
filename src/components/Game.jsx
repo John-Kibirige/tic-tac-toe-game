@@ -44,6 +44,8 @@ const Game = () => {
     />
   ));
 
+  console.log(clickedCards);
+
   return (
     <div className='px-6 mt-10 pb-6 relative transition-all'>
       <GameHeader next={next} winner={currentWinner} />
