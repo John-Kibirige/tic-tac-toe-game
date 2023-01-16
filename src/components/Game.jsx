@@ -47,7 +47,7 @@ const Game = () => {
   console.log(clickedCards);
 
   return (
-    <div className='px-6 mt-10 pb-6 relative transition-all'>
+    <div className='px-6 mt-10 pb-6 transition-all max-w-lg mx-auto'>
       <GameHeader next={next} winner={currentWinner} />
       <div className='cards grid grid-cols-3 mt-5 gap-4 mb-5'>{cards}</div>
       <Bottom winner={currentWinner} />
